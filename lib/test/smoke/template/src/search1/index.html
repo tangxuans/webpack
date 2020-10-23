@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en">
+<head>
+    ${require('raw-loader!./meta.html').default}
+    <title>Document</title>
+</head>
+<body>
+<script type="text/javascript" src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script type="text/javascript" src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script>${require('raw-loader!../node_modules/lib-flexibel/flexible.js')}</script>
+<div id="root" class="box"><!--HTML_PLACEHOLDER--></div>
+</body>
+</html>
