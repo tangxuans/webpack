@@ -4,13 +4,21 @@
 
 目的：快速复用组件
 
+##### 常见的模块化方式
+
+ES6：import * as largeNumber from "largeNumber"
+
+commonJS: const largeNumber = require("large-number")
+
+AMD:require(['large-number'],function(){})
+
    #### 1.1为什么需要构建工具？
 
  	转换ES6语法
 
-     转换JSX
-    
-     css前缀不全/预处理器
+​     转换JSX
+
+​     css前缀不全/预处理器
 
  	压缩混淆
 
@@ -57,9 +65,9 @@ console.log(myPath3);
 
 1.4.1 单入口：entry:"./src/index"
 
-		 多入口：entry:{app:"./src/index",app1: "./src/index1}
-	
-	     单入口output的文件名称可以写死，但是多入口，output的文件名称需要用[name]占位符占位
+​		 多入口：entry:{app:"./src/index",app1: "./src/index1}
+
+​         单入口output的文件名称可以写死，但是多入口，output的文件名称需要用[name]占位符占位
 
 ```javascript
 const path = require('path')
@@ -92,7 +100,7 @@ module.exports = {
 |  ra w-loader  | 将文件以字符串的形式导入 |
 | thread-loader | 多进程打包js和css        |
 
-	loaders的配置，放在根结点下面的module对象中的rules数组中：
+​	loaders的配置，放在根结点下面的module对象中的rules数组中：
 
 ```javascript
 const path = require('path')
@@ -660,7 +668,7 @@ module.exports = {
 
 Webpack4-postcss-autoprefixer配置警告：Replace Autoprefixer browsers option to Browserslist config. Use browserslis 巴拉巴拉。。。，解决办法：http://www.manongjc.com/detail/15-aznzmcuevjzkgwi.html
 
-	举个栗子：
+​	举个栗子：
 
 ```css
 .box{
@@ -843,9 +851,9 @@ rem是相对单位。px是绝对单位。
 
 资源内联的意义：
 
-	代码层面：页面框架的初始化脚本，上报相关打点，css内避免页面闪动
-	
-	请求层面：减少http网络请求数（小图片或者字体内联url-loader）
+​	代码层面：页面框架的初始化脚本，上报相关打点，css内避免页面闪动
+
+​	请求层面：减少http网络请求数（小图片或者字体内联url-loader）
 
 HTML和JS内联：使用raw-loader内联html。
 
@@ -1142,11 +1150,11 @@ new HtmlWebpackExternalsPlugin({
 
 chunks参数说明：
 
-	async ：异步引入的库进行分离（默认）
-	
-	initial：同步引入的库进行分离
-	
-	all：所有引入的库进行分离（推荐 ）
+​	async ：异步引入的库进行分离（默认）
+
+​    initial：同步引入的库进行分离
+
+​    all：所有引入的库进行分离（推荐 ）
 
 ```
 optimization:{//通过splitChunks提取react|react-dom公共包，提取后名字叫vendors
@@ -1298,7 +1306,7 @@ devServer:{
 
 webpack友好错误提示插件：friendly-errors-webpack-plugin
 
-	可以识别某些类别的webpack错误，并清理聚合和优先级，以提供更好的开发人员体验
+​	可以识别某些类别的webpack错误，并清理聚合和优先级，以提供更好的开发人员体验
 
 ##### 2.5.9构建异常和中断处理
 
@@ -1327,19 +1335,19 @@ function(){
 
 通用性：
 
-	业务开发者无需关注配置构建
-	
-	统一团队构建脚本
+​	业务开发者无需关注配置构建
+
+​	统一团队构建脚本
 
 可维护性：
 
-	构建配置合理的拆分
-	
-	REAMDEME文档，ChangeLog文档等
+​	构建配置合理的拆分
+
+​	REAMDEME文档，ChangeLog文档等
 
 质量：
 
-	冒烟测试，单元测试，测试覆盖率
+​	冒烟测试，单元测试，测试覆盖率
 
 ##### 2.6.1功能模块设计和目录结构
 
@@ -1387,9 +1395,9 @@ rimraf('./dist',()=>{
 })
 ```
 
-	是否有JS，CSS等静态资源文件
-	
-	是否有HTML文件             
+​	是否有JS，CSS等静态资源文件
+
+​	是否有HTML文件             
 
 ```
 const glob = require('glob-all')
@@ -1441,7 +1449,7 @@ describe('Checking generated html files',()=>{
 
 4.执行测试命令
 
-	npm run test
+​	npm run test
 
 
 
@@ -1478,7 +1486,7 @@ describe('webpack.base.js test case',()=>{
 })
 ```
 
-      测试覆盖率：sudo cnpm i istanbul -D
+​      测试覆盖率：sudo cnpm i istanbul -D
 
 ```
 "scripts": {
@@ -1492,25 +1500,25 @@ describe('webpack.base.js test case',()=>{
 
 什么是持续集成？
 
-	持续集成是经常合并小的代码更改的实践，而不是在开发周期结束时合并大型的更改。
+​	持续集成是经常合并小的代码更改的实践，而不是在开发周期结束时合并大型的更改。
 
 持续集成的作用：
 
-	1.帮助我们快速发现错误
-	
-	2.防止分支大幅偏离主干
+​	1.帮助我们快速发现错误
+
+​	2.防止分支大幅偏离主干
 
 核心措施是，代码集成到主干之前，必须通过自动化测试。只要有一个测试用例失败，就不能集成
 
 ###### 2.6.4.1接入travis CI
 
-	1 使用github账号登陆https://travis-ci.org/ 
-	
-	2 在https://travis-ci.org/account/repositories为项目开启
-	
-	3项目根目录下新增 .travis.yml
-	
-		3.1yml文件内容：
+​	1 使用github账号登陆https://travis-ci.org/ 
+
+​    2 在https://travis-ci.org/account/repositories为项目开启
+
+​	3项目根目录下新增 .travis.yml
+
+​		3.1yml文件内容：
 
 ```
 language:node_js
@@ -1567,7 +1575,7 @@ npm version patch.   修改版本的末位数（1.2.1）
 
 先行版本号：
 
-		先行版本号可以作为发布正式版之前的版本，格式是在修订版本号后面加上一个链接号（-），再加上一连串以点（.）分割的标识符，标识符可以由英文，数字，和连接号（[0-9A-Za-z-]）组成。
+​		先行版本号可以作为发布正式版之前的版本，格式是在修订版本号后面加上一个链接号（-），再加上一连串以点（.）分割的标识符，标识符可以由英文，数字，和连接号（[0-9A-Za-z-]）组成。
 
 1alpha：是内部测试版，一般不向外发布，会有很多bug。一般只有测试人员使用
 
@@ -1583,7 +1591,7 @@ npm version patch.   修改版本的末位数（1.2.1）
 
 “scripts”:{
 
-	"build:stats":"webpack --env production --json > stats.json"
+​	"build:stats":"webpack --env production --json > stats.json"
 
 }
 
@@ -1821,7 +1829,7 @@ optimization: {//通过splitChunks提取react|react-dom公共包，提取后名�
 
 使用DLLplugin分包:
 
-	新建web pack.dll.js:
+​	新建web pack.dll.js:
 
 ```javascript
 const path = require('path')
@@ -1849,7 +1857,7 @@ module.exports = {
 }
 ```
 
-	增加script："build:dll": "webpack --config webpack.dll.js"
+​	增加script："build:dll": "webpack --config webpack.dll.js"
 
 ##### 充分利用缓存提升二次构建速度
 
@@ -1899,7 +1907,7 @@ st
 
 png图片压缩的原理：
 
-	pngquant/tinypng：是一款png压缩器，通过将图像转换为具有alpha通道（通常比24/32位png文件小60-80%）的更高效的8位png格式，就是说将24位png文件转化为更小索引的8位图片，tinypng同时会将所有非必要的meatdata剥离掉。
+​	pngquant/tinypng：是一款png压缩器，通过将图像转换为具有alpha通道（通常比24/32位png文件小60-80%）的更高效的8位png格式，就是说将24位png文件转化为更小索引的8位图片，tinypng同时会将所有非必要的meatdata剥离掉。
 
 ```javascript
 {
@@ -2010,4 +2018,465 @@ module.exports = {
 
 ```
 
-##### 2.8使用动态polyfill服务
+##### 2.8体积优化策略总结
+
+Scope Hoisting
+
+Tree -shaking
+
+公共资源分离
+
+图片压缩
+
+动态polyfill（polyfill-service原理：识别不同的user agent 下发polyfill）
+
+#### 3webpack分析
+
+##### 	3.1WEBPACK命令行
+
+​	通过npm scripts运行webpack
+
+  - 生产环境：npm run build
+  - 开发环境：npm run dev
+
+#####    3.2通过webpack直接运行
+
+ - webpack bundle.js/entry.js
+
+#####    3.3查找webpack入口
+
+​	在命令行运行以上命令后，npm会让命令行工具进入node_modules\ .bin目录，查找是否存在webpack.sh或者webpack.cmd文件，如果存在就执行，如果不存在就抛出错误
+
+**实际的入口文件是：node_modules\webpack\bin\webpack.js**
+
+node_modules\webxpack\bin\package.js中：
+
+![image-20201026145414306](C:\Users\流云\AppData\Roaming\Typora\typora-user-images\image-20201026145414306.png)
+
+##### 3.4webpack入口文件分析
+
+```javascript
+1正常运行返回
+	process.exitCode = 0;
+2运行某个命令
+	const runCommand = (command, args) => {}
+    //例如：
+      //Do you want to install 'webpack-cli' (yes/no):
+      //当输入yes的时候会运行runcommand，其中参数‘command’为‘npm’，参数‘args’为[‘install’,'-D','webpack-cli']
+
+3判断某个包是否安装
+	const isInstalled = packageName => {}
+4webpack可用的cli
+    const CLIs = [
+        {
+            name: "webpack-cli",
+            ...
+        },
+        {
+            name: "webpack-command",
+            ...
+        }
+    ];
+5判断上面两个cli是否安装，根据安装数量进行处理
+const installedClis = CLIs.filter(cli => cli.installed);
+
+if (installedClis.length === 0) {
+    
+} else if (installedClis.length === 1) {
+    
+} else {
+
+}
+```
+
+##### 3.5webpack-Cli文件解读
+
+###### 3.5.1webpack-cli做了什么事情？
+
+- 引入yargs，对命令行进行定制
+- 分析命令行参数，对各个参数进行转换，组成编译配置项
+- 引用webpack，根据配置项进行编译和构建
+
+######   3.5.2 cli.js源码
+
+```javascript
+#!/usr/bin/env node
+
+'use strict';
+//使用v8的编译缓存
+//v8 是一个 JIT(Just in time) 编译器。与传统的解释器一行一行执行不同的是，
+//JIT 会在执行脚本前，对源码先解析（parsing）、再编译（compiling)，
+//速度相比前者提升了不少。但解析和编译仍然消耗时间。能否将中间结果缓存起来呢？
+// 所以 v8 在 4.2（node > 5.7.0） 时，就支持了 code caching 的功能,
+//缓存中间结果，持久化到硬盘。减少二次执行的构建时间，加快脚本的整体执行速度。
+require('v8-compile-cache');
+//导入本地包（允许全局安装的软件包使用自身的本地安装版本）
+const importLocal = require('import-local');
+const runCLI = require('../lib/bootstrap');
+const { yellow } = require('colorette');
+const { error, success } = require('../lib/utils/logger');
+const { packageExists } = require('../lib/utils/package-exists');
+const { promptInstallation } = require('../lib/utils/prompt-installation');
+
+// 首选本地安装`webpack cli`
+if (importLocal(__filename)) {
+    return;
+}
+
+process.title = 'webpack';
+// process.argv 属性会返回一个数组，
+//其中包含当 Node.js 进程被启动时传入的命令行参数。
+// 第一个元素是 process.execPath。（启动 Node.js 进程的可执行文件的绝对路径名）
+// 第二个元素是正被执行的 JavaScript 文件的路径。 
+//其余的元素是任何额外的命令行参数。
+const [, , ...rawArgs] = process.argv;
+//如果安装了webpack
+if (packageExists('webpack')) {
+    //执行命令
+    runCLI(rawArgs);
+} else {
+    //如果没有安装webpack。提示安装
+    promptInstallation('webpack -W', () => {
+        error(`It looks like ${yellow('webpack')} is not installed.`);
+    })
+        .then(() => {
+            //如果安装成功，运行命令
+            success(`${yellow('webpack')} was installed sucessfully.`);
+
+            runCLI(rawArgs);
+        })
+        .catch(() => {
+            error(`Action Interrupted, Please try once again or install ${yellow('webpack')} manually.`);
+
+            process.exit(2);
+        });
+}
+
+```
+
+runCli方法：
+
+```javascript
+const runCLI = async (cliArgs) => {
+    let args;
+	//命令有没有在commands（cli-args.js文件的变量）中定义
+    const commandIsUsed = isCommandUsed(cliArgs);
+    //处理命令行
+    const parsedArgs = parseArgs(cliArgs);
+    if (parsedArgs.unknownArgs.includes('help') || parsedArgs.opts.help) {
+        options.enabled = !cliArgs.includes('--no-color');
+        helpRunner(cliArgs);
+        process.exit(0);
+    }
+
+    if (parsedArgs.unknownArgs.includes('version') || parsedArgs.opts.version) {
+        options.enabled = !cliArgs.includes('--no-color');
+        versionRunner(cliArgs, commandIsUsed);
+        process.exit(0);
+    }
+	//如果cliArgs在commands定义了，直接返回
+    if (commandIsUsed) {
+        return;
+    }
+
+    try {
+        // handle the default webpack entry CLI argument, where instead
+        // of doing 'webpack-cli --entry ./index.js' you can simply do
+        // 'webpack-cli ./index.js'
+        // if the unknown arg starts with a '-', it will be considered
+        // an unknown flag rather than an entry
+        let entry;
+        if (parsedArgs.unknownArgs.length > 0 && !parsedArgs.unknownArgs[0].startsWith('-')) {
+            if (parsedArgs.unknownArgs.length === 1) {
+                entry = parsedArgs.unknownArgs[0];
+            } else {
+                entry = [];
+                parsedArgs.unknownArgs.forEach((unknown) => {
+                    if (!unknown.startsWith('-')) {
+                        entry.push(unknown);
+                    }
+                });
+            }
+        } else if (parsedArgs.unknownArgs.length > 0) {
+            parsedArgs.unknownArgs.forEach((unknown) => {
+                logger.warn(`Unknown argument: ${unknown}`);
+            });
+            const args = await cliExecuter();
+            const { opts } = parseArgs(args);
+            await cli.run(opts, core);
+            return;
+        }
+        const parsedArgsOpts = parsedArgs.opts;
+        // Enable/Disable color on console
+        options.enabled = parsedArgsOpts.color ? true : false;
+
+        if (entry) {
+            parsedArgsOpts.entry = entry;
+        }
+
+        const result = await cli.run(parsedArgsOpts, core);
+        if (!result) {
+            return;
+        }
+    } catch (err) {
+        if (err.name === 'UNKNOWN_VALUE') {
+            logger.error(`Parse Error (unknown argument): ${err.value}`);
+            return;
+        } else if (err.name === 'ALREADY_SET') {
+            const argsMap = {};
+            const keysToDelete = [];
+            cliArgs.forEach((arg, idx) => {
+                const oldMapValue = argsMap[arg];
+                argsMap[arg] = {
+                    value: cliArgs[idx],
+                    pos: idx,
+                };
+                // Swap idx of overridden value
+                if (oldMapValue) {
+                    argsMap[arg].pos = oldMapValue.pos;
+                    keysToDelete.push(idx + 1);
+                }
+            });
+            // Filter out the value for the overridden key
+            const newArgKeys = Object.keys(argsMap).filter((arg) => !keysToDelete.includes(argsMap[arg].pos));
+
+            cliArgs = newArgKeys;
+            args = argParser('', core, cliArgs);
+            await cli.run(args.opts, core);
+            logger.warn('\nDuplicate flags found, defaulting to last set value');
+        } else {
+            logger.error(err);
+            return;
+        }
+    }
+};
+```
+
+##### 3.6webpack流程
+
+![webpack流程](D:\Awumao\my-project1\builder-webpack\webpack流程.png)
+
+##### 3.7AST概念：
+
+抽象语法树（absrct syntax tree 或者缩写为AST），是源代码的抽象语法结构的树状表现形式，这里特指编程语言的源代码。树上的每个节点都表示源代码中的一种结构。
+
+##### 3.8简易的webpack
+
+simplepack:
+
+##### 3,9loader的链式调用与执行顺序
+
+demo参考：loader-order
+
+执行顺序：从右向左(从后向前)
+
+loader定义：其实是将一个模块导出为JavaScript函数
+
+例如：
+
+```javascript
+module.exports = function(source){
+    return source
+}
+```
+
+因为webpack采用的是compose的函数组合方法，所以从右向左处理：
+
+```javascript
+//args是参数。先执行g方法，然后再把结果给f执行
+compose = (f,g)=>(...args)=>{f(g(args))}
+```
+
+##### 3.10使用loader-runner高效进行loader的调试
+
+loader-runner:
+
+​	定义：可以在不安装webpack的情况下运行loaders
+
+​	作用：作为webpack的依赖，webpack使用他执行loader
+
+​				进行loader的开发和调试
+
+demo参考：raw-loader
+
+##### 3.11复杂的loader
+
+###### 	loader的参数获取
+
+- 通过loader-utils的getOPtions方法
+
+######    实现异步loader
+
+- 使用this.async
+
+######    在loader中使用缓存
+
+ - webpack中默认开启loader缓存，可以使用this.cacheable(false)关掉缓存
+
+ - 缓存条件：loader的结果在相同的输入下有确定的输出
+
+ - 有依赖的loader无法使用缓存
+
+   raw-loader.js
+
+   ```javascript
+   //编写一个将文件转换为string的loader
+   const loaderUtils = require('loader-utils')
+   const fs = require("fs")
+   const path = require("path")
+   module.exports = function(source){
+       // console.log("source",source)
+       this.cacheable(false)
+       const {name} = loaderUtils.getOptions(this)
+       const callback = this.async()//实现异步loader
+       // console.log("name",name)
+       const json = JSON.stringify(source)
+                   .replace('你看','木头人')
+                   .replace(/\u2028/g,'\\u2028')
+                   .replace(/\u2029/g,'\\u2029')
+       fs.readFile(path.join(__dirname,'./src/async.txt'),'utf-8',(err,data)=>{
+           this.callback(null,json)
+       })            
+       // this.callback(null,json)                
+       // return `export default ${json}`
+   }
+   ```
+
+   
+
+######    loader如何进行文件输出
+
+ - 通过this.emitFile进行文件写入
+
+   ```javascript
+   const loaderUtils = require('loader-utils')
+   console.log("loaderUtils",loaderUtils)
+   module.exports = function(source){
+           console.log('Loader a is excuted')
+           //this.emitFile(文件名，输出内容)
+           const url = loaderUtils.interpolateName(this,'[name].[txt]',source)
+           console.log("url",url)
+           this.emitFile(url,source)
+           return source
+   }
+   ```
+
+   最终会将入口文件index.js输出在dist目录
+   
+
+##### 3.12插件基本结构
+
+运行环境：插件没有loader那种独立的运行环境，只能在webpack中运行
+
+demo：my-plugin
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
